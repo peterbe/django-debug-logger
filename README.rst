@@ -49,3 +49,11 @@ The Django Debug Logger has one setting that can be set in `settings.py`:
 TODOs and BUGS
 ==============
 See: http://github.com/robhudson/django-debug-logger/issues
+
+STATUS
+======
+Currently very much in the proof of concept phase.  While it's working and
+showing good signs there is much to do with making the "plugins" more
+"pluggable".
+
+Help or ideas are appreciated.
