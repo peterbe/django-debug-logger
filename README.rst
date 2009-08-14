@@ -32,7 +32,7 @@ Installation
 Configuration
 =============
 
-The Django Debug Logger has two settings that can be set in `settings.py`:
+The Django Debug Logger has one setting that can be set in `settings.py`:
 
 #. Optional: Add a tuple called `DEBUG_LOGGER_PLUGINS` to your ``settings.py``
    file that specifies the full Python path to the plugin that you want
