@@ -20,6 +20,13 @@ DEBUG_LOGGER_IGNORE_URLS = (
     '/admin',
     '/debug_logger',
 )
+DEBUG_LOGGER_ALLOWABLE_STATUS_CODES = (
+    200,
+    301, # permanent redirect
+    302, # redirect
+    304, # response not modified
+)
+
 
 class DebugLoggerMiddleware(object):
     """
@@ -65,7 +72,7 @@ class DebugLoggerMiddleware(object):
     def process_response(self, request, response):
         if not self._do_log:
             return response
-        if response.status_code != 200:
+        if response.status_code not in DEBUG_LOGGER_ALLOWABLE_STATUS_CODES:
             return response
         # Debug Logger processing
         self.db_request.status_code = response.status_code
