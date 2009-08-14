@@ -18,6 +18,7 @@ from debugger.models import Request
 DEBUGGER_IGNORE_URLS = (
     '/media',
     '/admin',
+    '/debugger',
 )
 
 class DebuggerMiddleware(object):

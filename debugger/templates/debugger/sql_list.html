@@ -1,0 +1,16 @@
+<table>
+	<tr>
+		<th>timestamp</th>
+		<th>elapsed_time</th>
+		<th>SQL</th>
+		<th>stacktrace</th>
+	</tr>
+	{% for sql in sql_list %}
+	<tr>
+		<td>{{ sql.timestamp }}</td>
+		<td>{{ sql.elapsed_time }}</td>
+		<td>{{ sql.executed_sql }}</td>
+		<td>{{ sql.stacktrace }}</td>
+	</tr>
+	{% endfor %}
+</table>
