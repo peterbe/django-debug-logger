@@ -10,7 +10,7 @@
 		<td>{{ request.timestamp }}</td>
 		<td>{{ request.method }}</td>
 		<td>{{ request.absolute_path }}</td>
-		<td><a href="{% url debugger_sql_list request.id %}">{{ request.sql_set.all.count }}</a></td>
+		<td><a href="{% url debug_logger_sql_list request.id %}">{{ request.sql_set.all.count }}</a></td>
 	</tr>
 	{% endfor %}
 </table>

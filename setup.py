@@ -1,15 +1,15 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='django-debugger',
-    version=__import__('debugger').__version__,
+    name='django-debug-logger',
+    version=__import__('debug_logger').__version__,
     description='A configurable set of plugins that log various debug information about the current request/response to the database.',
     long_description=open('README.rst').read(),
     # Get more strings from http://www.python.org/pypi?:action=list_classifiers
     author='Rob Hudson',
     author_email='rob@cogit8.org',
-    url='http://github.com/robhudson/django-debugger/',
-    download_url='http://github.com/robhudson/django-debugger/downloads',
+    url='http://github.com/robhudson/django-debug-logger/',
+    download_url='http://github.com/robhudson/django-debug-logger/downloads',
     license='BSD',
     packages=find_packages(exclude=['ez_setup']),
     include_package_data=True,

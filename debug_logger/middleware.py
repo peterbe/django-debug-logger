@@ -1,5 +1,5 @@
 """
-Debugger Middleware
+Debug Logger Middleware
 """
 import datetime
 import os
@@ -10,32 +10,32 @@ from django.shortcuts import render_to_response
 from django.utils.encoding import smart_unicode
 from django.conf.urls.defaults import include, patterns
 
-from debugger import Debugger
-from debugger.models import Request
+from debug_logger import DebugLogger
+from debug_logger.models import Request
 
 # TODO: Consider setting request model obj via signals request_started, request_finished
 # TODO: Make this configurable
-DEBUGGER_IGNORE_URLS = (
+DEBUG_LOGGER_IGNORE_URLS = (
     '/media',
     '/admin',
-    '/debugger',
+    '/debug_logger',
 )
 
-class DebuggerMiddleware(object):
+class DebugLoggerMiddleware(object):
     """
-    Middleware to set up Debugger on incoming request and write out debug logs
+    Middleware to set up Debug Logger on incoming request and write out debug logs
     on response.
     """
     def __init__(self):
-        self.debugger = Debugger()
+        self.debug_logger = DebugLogger()
         self.db_request = None
 
     def do_log(self, request):
         if not settings.DEBUG:
             return False
-        # TODO: if this request is part of a debugger url
+        # TODO: if this request is part of a debug_logger url
         # TODO:     return False
-        for url in DEBUGGER_IGNORE_URLS:
+        for url in DEBUG_LOGGER_IGNORE_URLS:
             if request.path.startswith(url):
                 return False
         return True
@@ -53,13 +53,13 @@ class DebuggerMiddleware(object):
                 absolute_path=request.build_absolute_uri(),
                 # We don't know response code and size at this point
             )
-            for plugin in self.debugger.plugins:
+            for plugin in self.debug_logger.plugins:
                 plugin.process_request(request)
         return None
 
     def process_view(self, request, view_func, view_args, view_kwargs):
         if self._do_log:
-            for plugin in self.debugger.plugins:
+            for plugin in self.debug_logger.plugins:
                 plugin.process_view(request, view_func, view_args, view_kwargs)
 
     def process_response(self, request, response):
@@ -67,10 +67,10 @@ class DebuggerMiddleware(object):
             return response
         if response.status_code != 200:
             return response
-        # Debugger processing
+        # Debug Logger processing
         self.db_request.status_code = response.status_code
         # TODO: self.db_request.response_size = 
         self.db_request.save()
-        for plugin in self.debugger.plugins:
+        for plugin in self.debug_logger.plugins:
             plugin.process_response(self.db_request, request, response)
         return response

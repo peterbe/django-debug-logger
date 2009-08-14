@@ -1,10 +1,10 @@
 """
-Helper views for the debugger.
+Helper views for the debug_logger.
 """
 from django.shortcuts import get_object_or_404
 from django.views.generic import list_detail
 
-from debugger.models import Request, Sql
+from debug_logger.models import Request, Sql
 
 def index(request):
     return list_detail.object_list(

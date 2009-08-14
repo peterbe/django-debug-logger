@@ -4,16 +4,13 @@ import time
 import datetime
 import traceback
 import django
-from django.conf import settings
 from django.db import connection
 from django.db.backends import util
-from django.template.loader import render_to_string
 from django.utils import simplejson
 from django.utils.encoding import force_unicode
-from django.utils.hashcompat import sha_constructor
 
-from debugger.plugins import DebuggerPlugin
-from debugger.models import Sql, Request
+from debug_logger.plugins import DebugLoggerPlugin
+from debug_logger.models import Sql, Request
 
 # Figure out some paths
 django_path = os.path.realpath(os.path.dirname(django.__file__))
@@ -64,7 +61,7 @@ class DatabaseStatTracker(util.CursorDebugWrapper):
             })
 util.CursorDebugWrapper = DatabaseStatTracker
 
-class SQL(DebuggerPlugin):
+class SQL(DebugLoggerPlugin):
     """
     Plugin that stores SQL information.
     """

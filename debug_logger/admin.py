@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from debugger.models import Request, Sql
+from debug_logger.models import Request, Sql
 
 class RequestAdmin(admin.ModelAdmin):
     list_display = ('timestamp', 'method', 'absolute_path', 'status_code')
