@@ -14,10 +14,9 @@ def index(request):
     )
 
 def sql_list(request, request_id):
-    request = get_object_or_404(Request, pk=request_id)
+    request_object = get_object_or_404(Request, pk=request_id)
     return list_detail.object_list(
         request,
-        Sql.objects.filter(request=request).order_by('timestamp'),
+        Sql.objects.filter(request=request_object).order_by('timestamp'),
         template_object_name='sql',
     )
-
